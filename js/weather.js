@@ -1,6 +1,7 @@
 function gettingJSON () {
   // Display the forecast
   // Your code here.
+  const API_KEY = '63673ab96e5f5738edbf4614f1587fb4'
 
   // Set default location if one isn't provided
   let location
