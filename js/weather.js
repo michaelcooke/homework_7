@@ -1,22 +1,18 @@
 function gettingJSON () {
-  // Display the forecast
   const API_KEY = '63673ab96e5f5738edbf4614f1587fb4'
 
-  // Set default location if one isn't provided
   let location = document.querySelector('#location').value
 
   if (!location || location.length === 0) {
     location = 'Ann Arbor'
   }
 
-  // Set default temperature format if one isn't provided
   let format = 'imperial'
 
   if (document.getElementById('celcius').checked) {
     format = document.querySelector('#celcius').value
   }
 
-  // Set the query
   const query = 'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=' + format + '&appid=' + API_KEY
 
   $.getJSON(query, function (json) {
