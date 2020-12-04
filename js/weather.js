@@ -1,38 +1,40 @@
 function gettingJSON () {
   // Display the forecast
-  // Your code here.
   const API_KEY = '63673ab96e5f5738edbf4614f1587fb4'
 
   // Set default location if one isn't provided
-  let location
+  let location = document.querySelector('#location').value
 
-  // Your code here.
-  console.log('Location is : ' + location)
+  if (!location || location.length === 0) {
+    location = 'Ann Arbor'
+  }
 
   // Set default temperature format if one isn't provided
-  let format
+  let format = 'imperial'
 
-  // Your code here.
-  console.log('Format is ' + format)
+  if (document.getElementById('celcius').checked) {
+    format = document.querySelector('#celcius').value
+  }
 
   // Set the query
-  let query
-  // Your code here.
-
-  console.log('Query is :' + query)
-
-  // Create and set variables for each of the elements you
-  // need to update, location, temp, the image, etc.
-
-  let loc
-  let temp
-  let tempImg
-  // Your code here.
+  const query = 'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=' + format + '&appid=' + API_KEY
 
   $.getJSON(query, function (json) {
     // Use returned json to update the values of the three
     // elements in HTML.
     // I would print the JSON to the console
-    // Your code here.
+    const city = json.name
+    const icon = json.weather[0].icon
+    const temperature = json.main.temp
+
+    document.getElementById('forecast').style.display = 'block'
+
+    const tempImg = document.getElementById('tempImg')
+    tempImg.alt = json.weather[0].description
+    tempImg.src = 'https://openweathermap.org/img/w/' + icon + '.png'
+    tempImg.title = json.weather[0].main
+
+    document.getElementById('loc').innerHTML = city
+    document.getElementById('temp').innerHTML = temperature
   })
 }
